@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenSInt — Open Semantic Integration</title>
+  <style>
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; color: #0f172a; background: #f8fafc; }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 28px 18px 40px; }
+    h1 { font-size: 34px; margin: 0 0 8px; }
+    h2 { margin-top: 28px; font-size: 24px; }
+    p, li { line-height: 1.5; }
+    .sub { color: #334155; margin-bottom: 18px; }
+    .card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin-top: 14px; }
+    .kpi { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 10px; }
+    .pill { background:#eef2ff; border:1px solid #c7d2fe; padding:10px; border-radius: 10px; }
+    .diagram { width: 100%; background:#fff; border:1px solid #cbd5e1; border-radius: 12px; padding: 12px; box-sizing: border-box; overflow:auto; }
+    .small { color:#475569; font-size: 14px; }
+    a.btn { display:inline-block; margin-top:10px; text-decoration:none; padding:8px 12px; border:1px solid #94a3b8; border-radius:8px; color:#0f172a; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>OpenSInt</h1>
+    <p class="sub"><strong>Open Semantic Integration</strong> — turning existing regulatory dictionaries and mappings into a measurable, automatable semantic integration workflow.</p>
+
+    <div class="card">
+      <h2>Core idea</h2>
+      <ul>
+        <li>Start from what already exists (BIRD mappings, SDD, EBA dictionary structures).</li>
+        <li>Find and operationalise exiting semantic integrations in a useful and testable experiment where we can utilise advanced automation.</li>
+        <li>Use standards-focused, extensible tooling so the model can be used and extended by a broad ecosystem.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Experiment in scope</h2>
+      <p>Test a repeatable method to identify all semantic integrations between <strong>SDD</strong> and the <strong>EBA dictionary</strong>, leveraging integrations that already exist in BIRD. The experiment evaluates whether integrated mappings can drive cleaner transformation logic across reporting frameworks (e.g., FINREP, AnaCredit).</p>
+      <div class="kpi">
+        <div class="pill"><strong>Input:</strong> Existing BIRD semantic integrations + SDD/EBA dictionary items</div>
+        <div class="pill"><strong>Process:</strong> Discover, validate, and apply integrations</div>
+        <div class="pill"><strong>Output:</strong> Improved cross-framework transformation consistency</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="diagram">
+        <img src="./assets/opensint-diagram-v2.jpg" alt="OpenSInt semantic integration diagram" style="max-width:100%;height:auto;border-radius:8px;display:block;margin:auto;"/>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Why this matters</h2>
+      <ul>
+        <li>Reduces duplicate dictionary effort across authorities and vendors.</li>
+        <li>Makes semantic harmonisation measurable (and improvable over time).</li>
+        <li>Creates a practical bridge from open standards work to production-grade integration tooling.</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
