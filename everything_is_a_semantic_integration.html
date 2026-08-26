@@ -1,1 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="An approach paper proposing that BIRD treats every new regulatory requirement as a semantic integration and progressively promotes proven, reusable concepts into its semantic core." />
+  <title>Everything Is a Semantic Integration — A BIRD Approach Paper</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #5c677a;
+      --blue: #175cd3;
+      --blue-dark: #123b72;
+      --blue-soft: #eef5ff;
+      --line: #d9e2ef;
+      --paper: #ffffff;
+      --page: #f5f8fc;
+      --accent: #c88712;
+      --max-width: 980px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--page);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      font-size: 17px;
+      line-height: 1.68;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    a:hover { color: var(--blue-dark); }
+
+    .page {
+      width: min(calc(100% - 32px), var(--max-width));
+      margin: 32px auto;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 18px 50px rgba(39, 63, 98, 0.10);
+      overflow: hidden;
+    }
+
+    header {
+      padding: 64px 68px 50px;
+      color: #ffffff;
+      background:
+        radial-gradient(circle at 90% 10%, rgba(255,255,255,0.16), transparent 30%),
+        linear-gradient(135deg, #0f3f79 0%, #175cd3 100%);
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.86;
+    }
+
+    h1 {
+      max-width: 780px;
+      margin: 0;
+      font-size: clamp(2.3rem, 6vw, 4.8rem);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+    }
+
+    .subtitle {
+      max-width: 740px;
+      margin: 22px 0 0;
+      font-size: clamp(1.1rem, 2.2vw, 1.42rem);
+      line-height: 1.45;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .status {
+      display: inline-block;
+      margin-top: 26px;
+      padding: 7px 11px;
+      border: 1px solid rgba(255,255,255,0.42);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      background: rgba(255,255,255,0.10);
+    }
+
+    main { padding: 48px 68px 68px; }
+
+    .abstract {
+      margin: 0 0 38px;
+      padding: 25px 28px;
+      border-left: 5px solid var(--blue);
+      border-radius: 10px;
+      background: var(--blue-soft);
+    }
+
+    .abstract h2 {
+      margin-top: 0;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue-dark);
+    }
+
+    .abstract p:last-child { margin-bottom: 0; }
+
+    nav {
+      margin: 0 0 44px;
+      padding: 24px 28px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fbfdff;
+    }
+
+    nav h2 {
+      margin: 0 0 12px;
+      font-size: 1.05rem;
+      color: var(--blue-dark);
+    }
+
+    nav ol {
+      columns: 2;
+      column-gap: 48px;
+      margin: 0;
+      padding-left: 1.25rem;
+    }
+
+    nav li {
+      margin: 0 0 6px;
+      break-inside: avoid;
+    }
+
+    nav a { text-decoration: none; }
+
+    section {
+      margin-top: 48px;
+      scroll-margin-top: 24px;
+    }
+
+    h2 {
+      margin: 0 0 16px;
+      font-size: clamp(1.5rem, 3.2vw, 2.05rem);
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      color: var(--blue-dark);
+    }
+
+    h3 {
+      margin: 28px 0 10px;
+      font-size: 1.2rem;
+      line-height: 1.3;
+      color: #243d61;
+    }
+
+    p { margin: 0 0 17px; }
+
+    ul, ol { margin: 0 0 20px; padding-left: 1.45rem; }
+    li { margin-bottom: 9px; }
+
+    blockquote {
+      margin: 30px 0;
+      padding: 22px 26px;
+      border-left: 5px solid var(--accent);
+      border-radius: 8px;
+      background: #fff8e9;
+      color: #3d321e;
+      font-size: 1.12rem;
+      font-weight: 650;
+    }
+
+    .flow {
+      margin: 26px 0;
+      padding: 22px 24px;
+      border: 1px solid #bdd3f7;
+      border-radius: 12px;
+      background: #f7fbff;
+      color: #153a6c;
+      font-weight: 750;
+      text-align: center;
+      letter-spacing: 0.005em;
+    }
+
+    .principle {
+      margin: 28px 0;
+      padding: 20px 24px;
+      border-radius: 12px;
+      color: #ffffff;
+      background: linear-gradient(135deg, #123b72, #175cd3);
+      font-size: 1.12rem;
+      font-weight: 750;
+      text-align: center;
+    }
+
+    .steps {
+      counter-reset: approach-step;
+      list-style: none;
+      padding: 0;
+    }
+
+    .steps > li {
+      counter-increment: approach-step;
+      position: relative;
+      margin: 0 0 22px;
+      padding: 0 0 0 58px;
+    }
+
+    .steps > li::before {
+      content: counter(approach-step);
+      position: absolute;
+      top: 1px;
+      left: 0;
+      display: grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      border-radius: 50%;
+      color: #ffffff;
+      background: var(--blue);
+      font-weight: 800;
+    }
+
+    .steps h3 { margin-top: 0; }
+
+    .lifecycle {
+      display: inline-block;
+      margin: 7px 0 20px;
+      padding: 9px 13px;
+      border-radius: 8px;
+      background: #eef2f7;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.94rem;
+      color: #23344e;
+    }
+
+    .references {
+      margin-top: 56px;
+      padding-top: 30px;
+      border-top: 1px solid var(--line);
+      font-size: 0.93rem;
+      color: var(--muted);
+    }
+
+    .references h2 { font-size: 1.35rem; }
+    .references li { margin-bottom: 11px; }
+
+    footer {
+      padding: 24px 68px 30px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      background: #fbfdff;
+      font-size: 0.9rem;
+    }
+
+    sup a {
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    @media (max-width: 760px) {
+      .page { width: 100%; margin: 0; border: 0; border-radius: 0; }
+      header, main, footer { padding-left: 24px; padding-right: 24px; }
+      header { padding-top: 48px; }
+      nav ol { columns: 1; }
+      body { font-size: 16px; }
+    }
+
+    @media print {
+      @page { margin: 18mm; }
+      body { background: #ffffff; font-size: 11pt; }
+      .page { width: 100%; margin: 0; border: 0; box-shadow: none; }
+      header {
+        padding: 28px 34px;
+        color: #172033;
+        background: #ffffff;
+        border-bottom: 2px solid #175cd3;
+      }
+      .subtitle, .status, .eyebrow { color: #334155; }
+      main { padding: 28px 34px; }
+      footer { padding: 18px 34px; }
+      nav { display: none; }
+      a { color: inherit; text-decoration: none; }
+      section, blockquote, .abstract, .principle { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <article class="page">
+    <header>
+      <p class="eyebrow">BIRD approach paper</p>
+      <h1>Everything Is a Semantic Integration</h1>
+      <p class="subtitle">An output-led approach to evolving BIRD’s shared semantic core</p>
+      <span class="status">Status: Approach paper for discussion</span>
+    </header>
+
+    <main>
+      <section class="abstract" aria-labelledby="abstract-title">
+        <h2 id="abstract-title">Abstract</h2>
+        <p>Every new reporting requirement should enter BIRD as a semantic integration problem, and every successful integration should leave the BIRD semantic core stronger and less redundant than before.</p>
+        <p>BIRD already applies this principle when it maps non-reference regulatory dictionaries, such as the EBA dictionary, to the reference SDD dictionary. These mappings transform externally defined reporting requirements into reference annotated templates and Reference Output Layer structures. In other words, BIRD mappings are already semantic integrations.<sup><a href="#ref-1" aria-label="Reference 1">1</a></sup></p>
+        <p>This paper proposes extending that principle. Semantically integrated concepts discovered through output-layer mappings should not remain permanently outside the BIRD input model. Where they represent stable, reusable and sufficiently granular business meaning, they should progressively be promoted into the BIRD semantic core and reflected natively in the Input Layer or Enriched Input Layer. Existing overlapping or weaker input concepts can then be mapped, migrated and ultimately retired.</p>
+        <p>The result is an <strong>output-led, core-over-time</strong> approach to BIRD development.</p>
+      </section>
+
+      <nav aria-label="Contents">
+        <h2>Contents</h2>
+        <ol>
+          <li><a href="#starting-point">BIRD mappings are semantic integrations</a></li>
+          <li><a href="#jbrc">Alignment with the JBRC and EG SINT</a></li>
+          <li><a href="#promotion">From output integration to semantic promotion</a></li>
+          <li><a href="#output-led">Output-led does not mean output-shaped</a></li>
+          <li><a href="#lifecycle">Proposed integration lifecycle</a></li>
+          <li><a href="#criteria">Decision criteria for promotion</a></li>
+          <li><a href="#governance">Open experimentation and governed adoption</a></li>
+          <li><a href="#pilot">Recommended pilot</a></li>
+          <li><a href="#conclusion">Conclusion</a></li>
+        </ol>
+      </nav>
+
+      <section id="starting-point">
+        <h2>1. The starting point: BIRD mappings are semantic integrations</h2>
+        <p>BIRD separates:</p>
+        <ul>
+          <li>non-reference regulatory artefacts, such as EBA variables, members and annotated templates;</li>
+          <li>reference artefacts expressed using the SDD dictionary; and</li>
+          <li>mappings that connect the two.</li>
+        </ul>
+        <p>Applying these mappings allows BIRD to translate a non-reference annotated template into an SDD-based reference annotated template. The resulting reference concepts are then used to construct the Reference Output Layer against which BIRD transformations operate.<sup><a href="#ref-1" aria-label="Reference 1">1</a></sup></p>
+        <p>This is not merely a technical conversion of codes. It is a statement that:</p>
+        <blockquote>A concept expressed in one regulatory vocabulary has the same meaning as, can be decomposed into, or can be reconstructed from concepts in the BIRD reference vocabulary.</blockquote>
+        <p>The mapping package should therefore be understood as a first-class semantic integration mechanism.</p>
+        <p>However, mappings should not automatically become permanent bridges around a fixed input model. They should also provide evidence for improving that model.</p>
+      </section>
+
+      <section id="jbrc">
+        <h2>2. Alignment with the JBRC and EG SINT</h2>
+        <p>The Joint Bank Reporting Committee has placed semantic integration at the centre of integrated European bank reporting. Its objectives include identifying opportunities for semantic integration, developing common definitions and supporting a common regulatory data dictionary.<sup><a href="#ref-2" aria-label="Reference 2">2</a></sup></p>
+        <p>The JBRC Expert Group on Semantic Integration, officially abbreviated <strong>EG SINT</strong>, is tasked with integrating European supervisory and resolution reporting requirements with ESCB statistical reporting requirements. Its expected outputs include:</p>
+        <ol>
+          <li>proposals for semantically integrated concepts; and</li>
+          <li>recommendations for amendments to regulatory concepts and definitions.</li>
+        </ol>
+        <p><sup><a href="#ref-3" aria-label="Reference 3">3</a></sup></p>
+        <p>The JBRC terminology distinguishes between two useful levels of semantic integration:</p>
+        <ul>
+          <li><strong>Integration through a glossary</strong>, where existing terms and definitions are compared, matched and partially aligned.</li>
+          <li><strong>Integration through decomposition</strong>, where overlapping concepts are broken into semantic components that are just detailed enough to reconstruct all the original concepts without gaps, overlaps or redundancy.</li>
+        </ul>
+        <p>The latter corresponds directly to the <strong>“define once”</strong> principle. The JBRC also identifies semantic integration as a prerequisite for data integration and envisages that, once integrated reporting is established, redundant reporting requirements can eventually be removed in support of <strong>“report once”</strong>.<sup><a href="#ref-4" aria-label="Reference 4">4</a></sup></p>
+        <p>This suggests a natural division of roles:</p>
+        <ul>
+          <li><strong>EG SINT identifies and governs harmonised meaning.</strong></li>
+          <li><strong>BIRD operationalises that meaning in reusable metadata, data structures and transformations.</strong></li>
+          <li><strong>Executable implementations provide feedback on whether the proposed integration is complete and workable.</strong></li>
+        </ul>
+      </section>
+
+      <section id="promotion">
+        <h2>3. From output integration to semantic promotion</h2>
+        <p>The key proposal is to introduce an explicit process of <strong>semantic promotion</strong>.</p>
+        <p>A concept may initially enter BIRD as part of an external reporting framework. It is represented as a non-reference concept and mapped to an existing or candidate SDD concept. Once the mapping has been reviewed and tested, BIRD should ask a further question:</p>
+        <blockquote>Does this integration reveal a reusable business concept that should be represented natively in the BIRD Input Layer or Enriched Input Layer?</blockquote>
+        <p>Where the answer is yes, the concept should be promoted into the shared BIRD model. Existing input-layer concepts that overlap with it should be reconciled, migrated or deprecated.</p>
+        <div class="flow">External requirement → semantic integration → reference output → executable gap analysis → semantic promotion → improved IL/EIL</div>
+        <p>When the next framework arrives, it maps to a stronger semantic core rather than creating another parallel concept.</p>
+        <p>Without this promotion step, BIRD risks accumulating mappings around an increasingly historical input model. With it, every reporting framework becomes an opportunity to improve the common model.</p>
+      </section>
+
+      <section id="output-led">
+        <h2>4. Output-led does not mean output-shaped</h2>
+        <p>“Pulling output concepts into the input layer” should not mean copying report rows, aggregates or classifications directly into input tables.</p>
+        <p>BIRD input structures generally require specific, leaf-level facts, while output requirements may use broader parent members, aggregated categories or framework-specific classifications. The BIRD metadata overview explicitly notes this difference: input structures normally use the most specific applicable members, while broader output concepts can be reconstructed through hierarchies, filters and aggregations.<sup><a href="#ref-1" aria-label="Reference 1">1</a></sup></p>
+        <p>The items promoted into the input model should therefore normally be the <strong>reusable semantic primitives beneath the output concepts</strong>, not the report concepts themselves.</p>
+        <p>For example, several frameworks may use a concept called “Enterprise size” but apply different thresholds, dates, legal bases or calculation rules. Creating several similarly named input fields would preserve the semantic fragmentation.</p>
+        <p>A decomposition-led approach would instead identify reusable components such as:</p>
+        <ul>
+          <li>employee count;</li>
+          <li>annual turnover;</li>
+          <li>balance-sheet total;</li>
+          <li>observation or reference date;</li>
+          <li>consolidation scope; and</li>
+          <li>applicable legal definition.</li>
+        </ul>
+        <p>Those facts can be represented natively in the IL or EIL. Framework-specific enterprise-size classifications can then be derived for the relevant outputs. If EG SINT subsequently establishes a genuinely harmonised enterprise-size classification, that classification can also be promoted and the redundant alternatives retired.</p>
+        <div class="principle">Store common facts once; derive genuinely framework-specific interpretations explicitly.</div>
+      </section>
+
+      <section id="lifecycle">
+        <h2>5. Proposed BIRD semantic integration lifecycle</h2>
+        <ol class="steps">
+          <li>
+            <h3>Register the original requirement</h3>
+            <p>Import each regulatory framework as non-reference metadata, preserving its original terms, definitions, identifiers and legal references. The source meaning must remain visible and traceable.</p>
+          </li>
+          <li>
+            <h3>Integrate the semantics</h3>
+            <p>Map exact equivalents to existing SDD concepts. Where concepts only partially overlap, decompose them into reusable semantic components rather than forcing a false one-to-one match.</p>
+            <p>Outputs from EG SINT should be preferred as governed integration targets wherever they are applicable.</p>
+          </li>
+          <li>
+            <h3>Generate and test the reference output</h3>
+            <p>Apply the mappings to create the reference annotated template and Reference Output Layer. Use executable implementations to determine whether the reference output can actually be populated from the BIRD IL/EIL, including the necessary joins, derivations, hierarchies, filters and aggregations.</p>
+          </li>
+          <li>
+            <h3>Classify the gaps</h3>
+            <p>Each gap should be classified as one of the following:</p>
+            <ul>
+              <li>an existing input fact that can be linked directly;</li>
+              <li>a value derivable from existing input facts;</li>
+              <li>a genuinely missing reusable semantic primitive;</li>
+              <li>a framework-specific output concept that should remain in the output layer; or</li>
+              <li>a semantic conflict or duplication requiring governance.</li>
+            </ul>
+            <p>Gap analysis then becomes more than a coverage check. It becomes a structured source of proposals for improving BIRD.</p>
+          </li>
+          <li>
+            <h3>Promote, migrate and simplify</h3>
+            <p>Reusable concepts that pass semantic review and executable testing should move through a controlled status:</p>
+            <span class="lifecycle">candidate → reviewed → executable → approved → native BIRD concept</span>
+            <p>Where a promoted concept replaces existing IL/EIL concepts, BIRD should retain explicit mappings and transition rules for an agreed migration period. Legacy concepts can then be marked as deprecated and eventually removed.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section id="criteria">
+        <h2>6. Decision criteria for promotion</h2>
+        <p>A mapped output concept should be promoted into the BIRD semantic core only when:</p>
+        <ul>
+          <li>its meaning is unambiguous, including scope, population, timing, valuation and permitted values;</li>
+          <li>it is sufficiently granular to support reuse, or can be decomposed into concepts that are;</li>
+          <li>it is relevant beyond one isolated report cell or framework;</li>
+          <li>its relationship to existing SDD and IL/EIL concepts is documented;</li>
+          <li>it has traceability to regulatory definitions or agreed EG SINT concepts;</li>
+          <li>it can be validated through an executable reporting flow; and</li>
+          <li>a migration path exists for any concepts it replaces.</li>
+        </ul>
+        <p>A mapping should remain permanent where two frameworks intentionally require different meanings. Semantic integration should expose legitimate differences, not erase them.</p>
+      </section>
+
+      <section id="governance">
+        <h2>7. Open experimentation and governed adoption</h2>
+        <p>OpenSINT provides a useful experimental environment for this lifecycle. It publishes candidate mappings as open, version-controlled artefacts; supports AI-assisted discovery; retains human review; and seeks executable validation through Eclipse Free BIRD Tools. It explicitly treats mappings as candidates rather than automatically authoritative results.<sup><a href="#ref-5" aria-label="Reference 5">5</a></sup></p>
+        <p>This suggests a three-level operating model:</p>
+        <ul>
+          <li><strong>OpenSINT as the laboratory:</strong> generate, compare and test candidate integrations.</li>
+          <li><strong>Eclipse Free BIRD Tools as the executable evidence layer:</strong> demonstrate whether mappings and proposed model changes support working reporting flows and transparent lineage.</li>
+          <li><strong>BIRD and the relevant governance bodies as the governed semantic core:</strong> approve, publish and maintain accepted concepts.</li>
+        </ul>
+        <p>Ambiguities discovered during implementation should also be fed back to EG SINT. This creates a two-way relationship: EG SINT supplies integrated meaning to BIRD, while BIRD supplies concrete implementation evidence to the semantic integration process.</p>
+      </section>
+
+      <section id="pilot">
+        <h2>8. Recommended pilot</h2>
+        <p>A first pilot should select one concept family used across several statistical, supervisory or resolution frameworks—for example counterparty classification, enterprise size, instrument type or collateral.</p>
+        <p>The pilot should:</p>
+        <ol>
+          <li>inventory the existing source definitions and BIRD concepts;</li>
+          <li>incorporate any relevant EG SINT conclusions;</li>
+          <li>create or improve the non-reference-to-SDD mappings;</li>
+          <li>generate the corresponding reference outputs;</li>
+          <li>execute the reporting flows against the current IL/EIL;</li>
+          <li>identify reusable semantic primitives missing from the input model;</li>
+          <li>propose promotions, derivations and deprecations; and</li>
+          <li>publish the mappings, evidence, lineage and migration proposal.</li>
+        </ol>
+        <p>The main deliverable would not be only another mapping set. It would be a demonstrably improved BIRD semantic core.</p>
+      </section>
+
+      <section id="conclusion">
+        <h2>Conclusion</h2>
+        <p>BIRD mappings are semantic integrations. The next step is to treat them as an engine for continuously improving BIRD itself.</p>
+        <p>Mappings should act as scaffolding: they preserve traceability while new requirements are integrated and tested. But when a mapping repeatedly expresses a stable, reusable meaning, that meaning should become native to the BIRD semantic core. Over time, the integration work moves upstream, duplicate input concepts disappear, and future reporting frameworks become easier to incorporate.</p>
+        <blockquote>Every new requirement begins as a semantic integration. Every proven integration should become a candidate for simplifying BIRD.</blockquote>
+        <div class="principle">Mappings are the bridge; semantic promotion is the destination.</div>
+      </section>
+
+      <section class="references" aria-labelledby="references-title">
+        <h2 id="references-title">References</h2>
+        <ol>
+          <li id="ref-1"><a href="https://github.com/eclipse-efbt/efbt/wiki/BIRD%E2%80%90Metadata%E2%80%90Overview%E2%80%90with%E2%80%90examples%E2%80%90and%E2%80%90pictures">Eclipse Free BIRD Tools — BIRD Metadata Overview with examples and pictures</a>.</li>
+          <li id="ref-2"><a href="https://www.ecb.europa.eu/stats/ecb_statistics/reporting/jbrc/html/index.en.html">European Central Bank — Joint Bank Reporting Committee</a>.</li>
+          <li id="ref-3"><a href="https://www.ecb.europa.eu/stats/ecb_statistics/reporting/jbrc/shared/JBRC_work_programme_2026.pdf">JBRC Work Programme 2026</a>.</li>
+          <li id="ref-4"><a href="https://www.ecb.europa.eu/stats/ecb_statistics/reporting/jbrc/shared/Terms_and_definitions_relevant_for_integrated_reporting.pdf">JBRC — Terms and definitions relevant for integrated reporting</a>.</li>
+          <li id="ref-5"><a href="https://github.com/regcommunity/opensint-site/blob/main/index.html">OpenSINT — Open Semantic Integration for regulatory reporting</a>.</li>
+        </ol>
+      </section>
+    </main>
+
+    <footer>
+      Prepared as a concise discussion paper for the BIRD community. The document is self-contained and can be printed directly from a web browser.
+    </footer>
+  </article>
+</body>
+</html>
 
