@@ -307,7 +307,7 @@
       <section class="abstract" aria-labelledby="abstract-title">
         <h2 id="abstract-title">Abstract</h2>
         <p>Every new reporting requirement should enter BIRD as a semantic integration problem, and every successful integration should leave the BIRD semantic core stronger and less redundant than before.</p>
-        <p>BIRD already applies this principle when it maps non-reference regulatory dictionaries, such as the EBA dictionary, to the reference SDD dictionary. These mappings transform externally defined reporting requirements into reference annotated templates and Reference Output Layer structures. In other words, BIRD mappings are already semantic integrations.<sup><a href="#ref-1" aria-label="Reference 1">1</a></sup></p>
+        <p>BIRD already applies this principle when it maps non-reference regulatory dictionaries, such as the EBA dictionary, to the reference BIRD dictionary (historically based on the ECB's existing SDD dictionary). These mappings transform externally defined reporting requirements into reference annotated templates and Reference Output Layer structures. In other words, BIRD mappings are already semantic integrations.<sup><a href="#ref-1" aria-label="Reference 1">1</a></sup></p>
         <p>This paper proposes extending that principle. Semantically integrated concepts discovered through output-layer mappings should not remain permanently outside the BIRD input model. Where they represent stable, reusable and sufficiently granular business meaning, they should progressively be promoted into the BIRD semantic core and reflected natively in the Input Layer or Enriched Input Layer. Existing overlapping or weaker input concepts can then be mapped, migrated and ultimately retired.</p>
         <p>The result is an <strong>output-led, core-over-time</strong> approach to BIRD development.</p>
       </section>
@@ -332,10 +332,10 @@
         <p>BIRD separates:</p>
         <ul>
           <li>non-reference regulatory artefacts, such as EBA variables, members and annotated templates;</li>
-          <li>reference artefacts expressed using the SDD dictionary; and</li>
+          <li>reference artefacts expressed using the BIRD dictionary; and</li>
           <li>mappings that connect the two.</li>
         </ul>
-        <p>Applying these mappings allows BIRD to translate a non-reference annotated template into an SDD-based reference annotated template. The resulting reference concepts are then used to construct the Reference Output Layer against which BIRD transformations operate.<sup><a href="#ref-1" aria-label="Reference 1">1</a></sup></p>
+        <p>Applying these mappings allows BIRD to translate a non-reference annotated template into a BIRD-based reference annotated template. The resulting reference concepts are then used to construct the Reference Output Layer against which BIRD transformations operate.<sup><a href="#ref-1" aria-label="Reference 1">1</a></sup></p>
         <p>This is not merely a technical conversion of codes. It is a statement that:</p>
         <blockquote>A concept expressed in one regulatory vocabulary has the same meaning as, can be decomposed into, or can be reconstructed from concepts in the BIRD reference vocabulary.</blockquote>
         <p>The mapping package should therefore be understood as a first-class semantic integration mechanism.</p>
@@ -368,7 +368,7 @@
       <section id="promotion">
         <h2>3. From output integration to semantic promotion</h2>
         <p>The key proposal is to introduce an explicit process of <strong>semantic promotion</strong>.</p>
-        <p>A concept may initially enter BIRD as part of an external reporting framework. It is represented as a non-reference concept and mapped to an existing or candidate SDD concept. Once the mapping has been reviewed and tested, BIRD should ask a further question:</p>
+        <p>A concept may initially enter BIRD as part of an external reporting framework. It is represented as a non-reference concept and mapped to an existing or candidate BIRD concept. Once the mapping has been reviewed and tested, BIRD should ask a further question:</p>
         <blockquote>Does this integration reveal a reusable business concept that should be represented natively in the BIRD Input Layer or Enriched Input Layer?</blockquote>
         <p>Where the answer is yes, the concept should be promoted into the shared BIRD model. Existing input-layer concepts that overlap with it should be reconciled, migrated or deprecated.</p>
         <div class="flow">External requirement → semantic integration → reference output → executable gap analysis → semantic promotion → improved IL/EIL</div>
@@ -404,7 +404,7 @@
           </li>
           <li>
             <h3>Integrate the semantics</h3>
-            <p>Map exact equivalents to existing SDD concepts. Where concepts only partially overlap, decompose them into reusable semantic components rather than forcing a false one-to-one match.</p>
+            <p>Map exact equivalents to existing BIRD concepts. Where concepts only partially overlap, decompose them into reusable semantic components rather than forcing a false one-to-one match.</p>
             <p>Outputs from EG SINT should be preferred as governed integration targets wherever they are applicable.</p>
           </li>
           <li>
@@ -439,7 +439,7 @@
           <li>its meaning is unambiguous, including scope, population, timing, valuation and permitted values;</li>
           <li>it is sufficiently granular to support reuse, or can be decomposed into concepts that are;</li>
           <li>it is relevant beyond one isolated report cell or framework;</li>
-          <li>its relationship to existing SDD and IL/EIL concepts is documented;</li>
+          <li>its relationship to existing BIRD  and IL/EIL concepts is documented;</li>
           <li>it has traceability to regulatory definitions or agreed EG SINT concepts;</li>
           <li>it can be validated through an executable reporting flow; and</li>
           <li>a migration path exists for any concepts it replaces.</li>
@@ -466,7 +466,7 @@
         <ol>
           <li>inventory the existing source definitions and BIRD concepts;</li>
           <li>incorporate any relevant EG SINT conclusions;</li>
-          <li>create or improve the non-reference-to-SDD mappings;</li>
+          <li>create or improve the non-reference-to-bird-reference mappings;</li>
           <li>generate the corresponding reference outputs;</li>
           <li>execute the reporting flows against the current IL/EIL;</li>
           <li>identify reusable semantic primitives missing from the input model;</li>
@@ -491,7 +491,7 @@
           <li id="ref-2"><a href="https://www.ecb.europa.eu/stats/ecb_statistics/reporting/jbrc/html/index.en.html">European Central Bank — Joint Bank Reporting Committee</a>.</li>
           <li id="ref-3"><a href="https://www.ecb.europa.eu/stats/ecb_statistics/reporting/jbrc/shared/JBRC_work_programme_2026.pdf">JBRC Work Programme 2026</a>.</li>
           <li id="ref-4"><a href="https://www.ecb.europa.eu/stats/ecb_statistics/reporting/jbrc/shared/Terms_and_definitions_relevant_for_integrated_reporting.pdf">JBRC — Terms and definitions relevant for integrated reporting</a>.</li>
-          <li id="ref-5"><a href="https://github.com/regcommunity/opensint-site/blob/main/index.html">OpenSINT — Open Semantic Integration for regulatory reporting</a>.</li>
+          <li id="ref-5"><a href="https://regcommunity.github.io/opensint-site/">OpenSINT — Open Semantic Integration for regulatory reporting</a>.</li>
         </ol>
       </section>
     </main>
